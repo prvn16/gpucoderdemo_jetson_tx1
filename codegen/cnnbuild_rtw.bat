@@ -1,3 +1,3 @@
-call "%VS120COMNTOOLS%..\..\VC\vcvarsall.bat" AMD64
+call "%VS140COMNTOOLS%..\..\VC\vcvarsall.bat" AMD64
 
-gmake -f "C:\Sumpurn\gpucoderdemo_jetson_tx1\codegen\cnnbuild_rtw.mk" all
+gmake -f "C:\Sumpurn\Projects\GPU\gpucoderdemo_jetson_tx1\codegen\cnnbuild_rtw.mk" all

@@ -1,9 +1,9 @@
 ###########################################################################
 ## Makefile generated for MATLAB file/project |>PROJNAME<|. 
 ## 
-## Makefile     : C:\Sumpurn\gpucoderdemo_jetson_tx1\codegen\cnnbuild_rtw.mk
+## Makefile     : cnnbuild_rtw.mk
 ## 
-## Final product: C:/Sumpurn/gpucoderdemo_jetson_tx1/codegen/cnnbuild.lib
+## Final product: ./cnnbuild.lib
 ## Product type : Static Library
 ## 
 ###########################################################################
@@ -14,9 +14,9 @@
 ## MACROS
 ##########################################################################
 
-PRODUCT_NAME              = C:/Sumpurn/gpucoderdemo_jetson_tx1/codegen/cnnbuild.lib
-MAKEFILE                  = C:\Sumpurn\gpucoderdemo_jetson_tx1\codegen\cnnbuild_rtw.mk
-START_DIR                 = C:/Sumpurn/gpucoderdemo_jetson_tx1/codegen
+PRODUCT_NAME              = ./cnnbuild.lib
+MAKEFILE                  = cnnbuild_rtw.mk
+START_DIR                 = .
 ARCH                      = win64
 MATLAB                    = C:\Program Files\MATLAB\R2017b
 MATLAB_ARCH_BIN           = $(MATLABROOT)/bin/$(ARCH)
@@ -25,8 +25,8 @@ MATLAB_ARCH_BIN           = $(MATLABROOT)/bin/$(ARCH)
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          NVIDIA CUDA  (w/Microsoft Visual C++ 2013)  | nmake (64-bit Windows)
-# Supported Version(s):    12.0
+# Toolchain Name:          Microsoft Visual C++ 2015 v14.0 | nmake (64-bit Windows)
+# Supported Version(s):    14.0
 
 #------------------------
 # BUILD TOOL COMMANDS
@@ -45,7 +45,7 @@ CPP = nvcc
 CPP_LD = nvcc -lib
 
 # Archiver: GNU Archiver
-AR = lib
+AR = ar
 
 # Execute: Execute
 EXECUTE = $(PRODUCT)
@@ -58,10 +58,10 @@ MAKE = $(MAKE_PATH)/gmake
 # Directives/Utilities
 #-------------------------
 
-CDEBUG              = -g -G 
-CPPDEBUG            = -g -G 
-LDDEBUG             = -g -G 
-CPPLDDEBUG          = -g -G 
+CDEBUG              = -Zi
+CPPDEBUG            = -Zi
+LDDEBUG             = /DEBUG
+CPPLDDEBUG          = /DEBUG
 RM                  = @rm -f
 ECHO                = @echo
 MV                  = @mv
@@ -71,20 +71,20 @@ MV                  = @mv
 # "Faster Builds" Build Configuration
 #----------------------------------------
 
-ARFLAGS =   $(ARDEBUG)
-CFLAGS =  -c $(C_STANDARD_OPTS) -Xcompiler "/wd 4819" -rdc=true -Xcudafe "--diag_suppress=unsigned_compare_with_zero" -O0 $(CDEBUG)
-CPPFLAGS =  -c $(CPP_STANDARD_OPTS) -Xcompiler "/wd 4819" -rdc=true -Xcudafe "--diag_suppress=unsigned_compare_with_zero" -O0 $(CPPDEBUG)
-CPP_LDFLAGS =  -Xnvlink -w -L"$(CUDA_PATH)\lib\x64" -Xarchive "/IGNORE:4006" -Xarchive "/IGNORE:4221" $(conlibs) cufft.lib cudart.lib cublas.lib cusolver.lib -Wno-deprecated-gpu-targets $(CPPLDDEBUG)
-CPP_SHAREDLIB_LDFLAGS =  -shared -Xnvlink -w -L"$(CUDA_PATH)\lib\x64" -Xarchive "/IGNORE:4006" -Xarchive "/IGNORE:4221" cufft.lib cudart.lib cublas.lib cusolver.lib -Wno-deprecated-gpu-targets -Xlinker -dll -Xlinker -def:$(DEF_FILE) $(CPPLDDEBUG)
+ARFLAGS =  /nologo $(ARDEBUG)
+CFLAGS =  $(cflags) $(CVARSFLAG) $(CFLAGS_ADDITIONAL) /Od /Oy- $(CDEBUG)
+CPPFLAGS =  /TP $(cflags) $(CVARSFLAG) $(CPPFLAGS_ADDITIONAL) /Od /Oy- $(CPPDEBUG)
+CPP_LDFLAGS =  $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) $(LDDEBUG)
+CPP_SHAREDLIB_LDFLAGS =  $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) -dll -def:$(DEF_FILE) $(LDDEBUG)
 DOWNLOAD_FLAGS = 
 EXECUTE_FLAGS = 
-LDFLAGS =  -Xnvlink -w -L"$(CUDA_PATH)\lib\x64" -Xarchive "/IGNORE:4006" -Xarchive "/IGNORE:4221" $(conlibs) cufft.lib cudart.lib cublas.lib cusolver.lib -Wno-deprecated-gpu-targets $(LDDEBUG)
+LDFLAGS =  $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) $(LDDEBUG)
 MEX_CPPFLAGS = 
 MEX_CPPLDFLAGS = 
-MEX_CFLAGS =  -MATLAB_ARCH=$(ARCH) $(INCLUDES)   COPTIMFLAGS="$(C_STANDARD_OPTS)  -O0  $(DEFINES)"   -silent
-MEX_LDFLAGS =  LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS' LDFLAGS=='$$LDFLAGS'
+MEX_CFLAGS =  $(MEX_ARCH) OPTIMFLAGS="/Od /Oy- $(MDFLAG) $(DEFINES)" $(MEX_OPTS_FLAG) $(MEX_DEBUG)
+MEX_LDFLAGS =  LDFLAGS=='$$LDFLAGS'
 MAKE_FLAGS =  -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE) -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS =  -shared -Xnvlink -w -L"$(CUDA_PATH)\lib\x64" -Xarchive "/IGNORE:4006" -Xarchive "/IGNORE:4221" cufft.lib cudart.lib cublas.lib cusolver.lib -Wno-deprecated-gpu-targets -Xlinker -dll -Xlinker -def:$(DEF_FILE) $(LDDEBUG)
+SHAREDLIB_LDFLAGS =  $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) -dll -def:$(DEF_FILE) $(LDDEBUG)
 
 
 #--------------------
@@ -120,7 +120,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS =  $(START_DIR)/cnn_api.obj $(START_DIR)/cnn_exec.obj
+OBJS =  $(START_DIR)/cnn_api.obju $(START_DIR)/cnn_exec.objpp
 
 ALL_OBJS = $(OBJS)
 
@@ -130,7 +130,7 @@ ALL_OBJS = $(OBJS)
 
 SYSTEM_LIBS =  -L"$(START_DIR)"
 
-TOOLCHAIN_LIBS = -L"$(CUDA_PATH)\lib\x64" "$(NVIDIA_CUDNN)\lib\x64\cudnn.lib" -lcublas -lcudart -lcusolver 
+TOOLCHAIN_LIBS =  -lcublas -lcudart -lcusolver 
 
 ###########################################################################
 ## PHONY TARGETS
